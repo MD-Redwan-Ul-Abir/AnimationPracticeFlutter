@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 
-class ElementMovingAnimation extends StatefulWidget {
-  const ElementMovingAnimation({super.key});
+class TwineAnimationExample extends StatefulWidget {
+  const TwineAnimationExample({super.key});
 
   @override
-  State<ElementMovingAnimation> createState() => _ElementMovingAnimationState();
+  State<TwineAnimationExample> createState() => _TwineAnimationExampleState();
 }
 
-class _ElementMovingAnimationState extends State<ElementMovingAnimation>
-    with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
+class _TwineAnimationExampleState extends State<TwineAnimationExample> with SingleTickerProviderStateMixin{
 
+  late AnimationController animationController;
+  AlignmentTween alignmentTween = AlignmentTween(begin: Alignment.topLeft,end: Alignment.center);
+  Animation<Alignment> animation = AlwaysStoppedAnimation(Alignment.topLeft);
+
+  
   @override
   void initState() {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 1000),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("1. Element moving animation"),
+        title: Text("2. Element moving animation"),
         centerTitle: true,
       ),
       body: AnimatedBuilder(animation: animationController, builder: (context,child){
         return Align(
-          alignment: Alignment(1*(1-animationController.value), -1*(1-animationController.value)),
-          child: Container(height: 20, width: 20, color: Colors.red),
+          alignment: animation.value,
+          child: Container(height: 20, width: 20, color: Colors.pink),
         );
       }),
       floatingActionButton: FloatingActionButton(
@@ -38,6 +40,7 @@ class _ElementMovingAnimationState extends State<ElementMovingAnimation>
           animationController.reset();
           print("current value =====>> ${animationController.value}");
           animationController.forward();
+          animation = animationController.drive(alignmentTween.chain(CurveTween(curve: Curves.easeInOutBack)));
         },
         child: Center(child: Icon(Icons.play_circle)),
       ),
