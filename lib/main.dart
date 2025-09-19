@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // Use TestCaseAnimation instead of ElementMovingWithMultidirection
-      home: TestCaseAnimation(),
+      home: TwineAnimationExample(),
     );
   }
 }
