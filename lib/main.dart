@@ -4,6 +4,7 @@ import '1_ElementMovingAnimation.dart';
 import '2.ElementMovingAnimationUsingTwine.dart';
 import '3.ElementMovingMultidirection.dart';
 import '4._MultipleElements.dart';
+import 'fireWorkAnimation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:   CustomPathAnimation( ),
+      home:   TwineAnimationExample( ),
     );
   }
 }
